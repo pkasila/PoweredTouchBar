@@ -26,6 +26,7 @@ public class TouchBarContainedViewController<Content: View>: NSViewController, N
         touchBar.customizationIdentifier =  NSTouchBar.CustomizationIdentifier("My First TouchBar")
         touchBar.defaultItemIdentifiers = [NSTouchBarItem.Identifier("HelloWorld")]
         touchBar.customizationAllowedItemIdentifiers = [NSTouchBarItem.Identifier("HelloWorld")]
+        touchBar.customizationRequiredItemIdentifiers = [NSTouchBarItem.Identifier("HelloWorld")]
         
         return touchBar
     }
