@@ -1,5 +1,5 @@
 //
-//  TouchBarContainedViewController.swift
+//  TouchBarPoweredViewController.swift
 //  
 //
 //  Created by Pavel Kasila on 22.03.21.
@@ -8,7 +8,7 @@
 import AppKit
 import SwiftUI
 
-public class TouchBarContainedViewController<Content: View>: NSViewController, NSTouchBarDelegate {
+public class TouchBarPoweredViewController<Content: View>: NSViewController, NSTouchBarDelegate {
     var content: (() -> Content)!
     var items: [PoweredTouchBarItem]!
     

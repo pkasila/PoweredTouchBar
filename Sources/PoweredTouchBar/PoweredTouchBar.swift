@@ -16,14 +16,14 @@ public struct PoweredTouchBar<Content: View>: NSViewControllerRepresentable {
         self.items = items
     }
     
-    public func makeNSViewController(context: Context) -> TouchBarContainedViewController<Content> {
-        let vc = TouchBarContainedViewController<Content>()
+    public func makeNSViewController(context: Context) -> TouchBarPoweredViewController<Content> {
+        let vc = TouchBarPoweredViewController<Content>()
         vc.content = content
         vc.items = items()
         return vc
     }
     
-    public func updateNSViewController(_ nsViewController: TouchBarContainedViewController<Content>, context: Context) {
+    public func updateNSViewController(_ nsViewController: TouchBarPoweredViewController<Content>, context: Context) {
         
     }
 }
