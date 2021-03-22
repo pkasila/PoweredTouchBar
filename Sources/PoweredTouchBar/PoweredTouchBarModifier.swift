@@ -16,7 +16,7 @@ struct PoweredTouchBarModifier: ViewModifier {
 }
 
 extension View {
-    func poweredTouchBar() -> some View {
+    public func poweredTouchBar() -> some View {
         self.modifier(PoweredTouchBarModifier())
     }
 }
