@@ -7,8 +7,8 @@
 
 import Foundation
 
-@_functionBuilder struct PoweredTouchBarBuilder {
-    static func buildBlock(_ atrs: PoweredTouchBarItem...) -> [PoweredTouchBarItem] {
+@_functionBuilder public struct PoweredTouchBarBuilder {
+    public static func buildBlock(_ atrs: PoweredTouchBarItem...) -> [PoweredTouchBarItem] {
         return atrs
     }
 }
