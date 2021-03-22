@@ -8,10 +8,37 @@
 import AppKit
 import SwiftUI
 
-public class TouchBarContainedViewController<Content: View>: NSViewController {
+public class TouchBarContainedViewController<Content: View>: NSViewController, NSTouchBarDelegate {
     var content: (() -> Content)!
     
     public override func loadView() {
         self.view = NSHostingView(rootView: content())
+    }
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        view.becomeFirstResponder()
+    }
+    
+    public override func makeTouchBar() -> NSTouchBar? {
+        let touchBar = NSTouchBar()
+        touchBar.delegate = self
+        
+        touchBar.customizationIdentifier =  NSTouchBar.CustomizationIdentifier("My First TouchBar")
+        touchBar.defaultItemIdentifiers = [NSTouchBarItem.Identifier("HelloWorld")]
+        touchBar.customizationAllowedItemIdentifiers = [NSTouchBarItem.Identifier("HelloWorld")]
+        
+        return touchBar
+    }
+    
+    public func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
+            switch identifier {
+            case NSTouchBarItem.Identifier("HelloWorld"):
+                let customViewItem = NSCustomTouchBarItem(identifier: identifier)
+                customViewItem.view = NSTextField(labelWithString: "Hello World!")
+                return customViewItem
+            default:
+                return nil
+            }
     }
 }
