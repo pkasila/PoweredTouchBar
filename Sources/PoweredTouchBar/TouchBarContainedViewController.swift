@@ -13,6 +13,5 @@ public class TouchBarContainedViewController<Content: View>: NSViewController {
     
     public override func loadView() {
         self.view = NSHostingView(rootView: content())
-        super.loadView()
     }
 }
