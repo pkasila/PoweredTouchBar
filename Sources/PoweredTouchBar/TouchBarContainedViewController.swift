@@ -17,7 +17,11 @@ public class TouchBarContainedViewController<Content: View>: NSViewController, N
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        view.becomeFirstResponder()
+        
+        // Delay making the view the first responder to avoid SwiftUI errors.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            self.view.becomeFirstResponder()
+        }
     }
     
     public override func makeTouchBar() -> NSTouchBar? {
