@@ -7,7 +7,7 @@
 
 import AppKit
 
-public class PoweredTouchBarButton: PoweredTouchBarItem {
+public class PoweredTouchBarButton: NSObject, PoweredTouchBarItem {
     
     var identifier: String
     var item: NSButtonTouchBarItem
@@ -15,19 +15,19 @@ public class PoweredTouchBarButton: PoweredTouchBarItem {
     
     public init(identifier: String, title: String, action: @escaping () -> Void) {
         self.identifier = identifier
-        self.item = NSButtonTouchBarItem(identifier: NSTouchBarItem.Identifier(self.identifier), title: title, target: nil, action: #selector(objAction))
+        self.item = NSButtonTouchBarItem(identifier: NSTouchBarItem.Identifier(self.identifier), title: title, target: self, action: #selector(objAction))
         self.action = action
     }
     
     public init(identifier: String, image: NSImage, action: @escaping () -> Void) {
         self.identifier = identifier
-        self.item = NSButtonTouchBarItem(identifier: NSTouchBarItem.Identifier(self.identifier), image: image, target: nil, action: #selector(objAction))
+        self.item = NSButtonTouchBarItem(identifier: NSTouchBarItem.Identifier(self.identifier), image: image, target: self, action: #selector(objAction))
         self.action = action
     }
     
     public init(identifier: String, title: String, image: NSImage, action: @escaping () -> Void) {
         self.identifier = identifier
-        self.item = NSButtonTouchBarItem(identifier: NSTouchBarItem.Identifier(self.identifier), title: title, image: image, target: nil, action: #selector(objAction))
+        self.item = NSButtonTouchBarItem(identifier: NSTouchBarItem.Identifier(self.identifier), title: title, image: image, target: self, action: #selector(objAction))
         self.action = action
     }
     
@@ -39,7 +39,7 @@ public class PoweredTouchBarButton: PoweredTouchBarItem {
         return NSTouchBarItem.Identifier(identifier)
     }
     
-    @objc func objAction() {
+    @objc func objAction(_ sender: Any) {
         action()
     }
 }
