@@ -13,6 +13,7 @@ There is a simple example of how to use `PoweredTouchBar` library:
 import SwiftUI
 
 struct ContentView: View {
+    @State var text: String = ""
     var body: some View {
         TextEditor(text: $text)
             .poweredTouchBar {
