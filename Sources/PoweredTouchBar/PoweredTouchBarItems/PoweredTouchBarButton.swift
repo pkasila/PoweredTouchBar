@@ -10,18 +10,28 @@ import AppKit
 public class PoweredTouchBarButton: PoweredTouchBarItem {
     
     var identifier: String
-    var title: String
+    var item: NSButtonTouchBarItem
     var action: () -> Void
     
     public init(identifier: String, title: String, action: @escaping () -> Void) {
         self.identifier = identifier
-        self.title = title
+        self.item = NSButtonTouchBarItem(identifier: NSTouchBarItem.Identifier(self.identifier), title: title, target: nil, action: #selector(objAction))
+        self.action = action
+    }
+    
+    public init(identifier: String, image: NSImage, action: @escaping () -> Void) {
+        self.identifier = identifier
+        self.item = NSButtonTouchBarItem(identifier: NSTouchBarItem.Identifier(self.identifier), image: image, target: nil, action: #selector(objAction))
+        self.action = action
+    }
+    
+    public init(identifier: String, title: String, image: NSImage, action: @escaping () -> Void) {
+        self.identifier = identifier
+        self.item = NSButtonTouchBarItem(identifier: NSTouchBarItem.Identifier(self.identifier), title: title, image: image, target: nil, action: #selector(objAction))
         self.action = action
     }
     
     public func touchBarItem() -> NSTouchBarItem {
-        let item = NSCustomTouchBarItem(identifier: getIdentifier())
-        item.view = NSButton(title: title, target: nil, action: #selector(objAction))
         return item
     }
     
