@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct PoweredTouchBarModifier: ViewModifier {
+    var items: () -> [PoweredTouchBarItem]
+    
+    init(items: @escaping () -> [PoweredTouchBarItem]) {
+        self.items = items
+    }
+    
     func body(content: Content) -> some View {
-        PoweredTouchBar {
-            content
-        }
+        PoweredTouchBar(content: {content}, items: items)
     }
 }
 
 extension View {
-    public func poweredTouchBar() -> some View {
-        self.modifier(PoweredTouchBarModifier())
+    public func poweredTouchBar(@PoweredTouchBarBuilder items: @escaping () -> [PoweredTouchBarItem]) -> some View {
+        self.modifier(PoweredTouchBarModifier(items: items))
     }
 }

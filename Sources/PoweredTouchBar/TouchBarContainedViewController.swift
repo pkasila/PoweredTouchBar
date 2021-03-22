@@ -10,6 +10,7 @@ import SwiftUI
 
 public class TouchBarContainedViewController<Content: View>: NSViewController, NSTouchBarDelegate {
     var content: (() -> Content)!
+    var items: [PoweredTouchBarItem]!
     
     public override func loadView() {
         self.view = NSHostingView(rootView: content().focusable())
@@ -23,21 +24,21 @@ public class TouchBarContainedViewController<Content: View>: NSViewController, N
         let touchBar = NSTouchBar()
         touchBar.delegate = self
         
-        touchBar.customizationIdentifier =  NSTouchBar.CustomizationIdentifier("My First TouchBar")
-        touchBar.defaultItemIdentifiers = [NSTouchBarItem.Identifier("HelloWorld"), .otherItemsProxy]
-        touchBar.customizationAllowedItemIdentifiers = [NSTouchBarItem.Identifier("HelloWorld")]
+        touchBar.customizationIdentifier =  NSTouchBar.CustomizationIdentifier("PoweredTouchBarTesting")
+        let ids = items.map {$0.getIdentifier()}
+        touchBar.defaultItemIdentifiers = ids + [.otherItemsProxy]
+        touchBar.customizationAllowedItemIdentifiers = ids
         
         return touchBar
     }
     
     public func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
-            switch identifier {
-            case NSTouchBarItem.Identifier("HelloWorld"):
-                let item = NSCustomTouchBarItem(identifier: identifier)
-                item.view = NSButton(title: "Test button", target: nil, action: nil)
-                return item
-            default:
-                return nil
-            }
+        if let item = items.first(where: { (item) -> Bool in
+            return item.getIdentifier() == identifier
+        }) {
+            return item.touchBarItem()
+        } else {
+            return nil
+        }
     }
 }
