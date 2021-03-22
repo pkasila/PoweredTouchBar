@@ -12,7 +12,7 @@ public class TouchBarContainedViewController<Content: View>: NSViewController, N
     var content: (() -> Content)!
     
     public override func loadView() {
-        self.view = NSHostingView(rootView: content())
+        self.view = NSHostingView(rootView: content().focusable())
         self.touchBar = makeTouchBar()
     }
     
