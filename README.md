@@ -2,8 +2,13 @@
 
 PoweredTouchBar is a library which lets you easily and more powerfully use Touch Bar on macOS with SwiftUI.
 
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/17158860/112017767-f9cb1000-8b3e-11eb-82ca-14ad2705f4a8.png">
+
 ## How to use it?
 There is a simple example of how to use `PoweredTouchBar` library:
+
+<img width="703" alt="image" src="https://user-images.githubusercontent.com/17158860/112017959-28e18180-8b3f-11eb-92dc-e629964a4360.png">
+
 ```swift
 import SwiftUI
 
