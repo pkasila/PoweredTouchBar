@@ -13,7 +13,6 @@ public class TouchBarContainedViewController<Content: View>: NSViewController, N
     
     public override func loadView() {
         self.view = NSHostingView(rootView: content().focusable())
-        self.touchBar = makeTouchBar()
     }
     
     public override func viewDidLoad() {
@@ -34,9 +33,9 @@ public class TouchBarContainedViewController<Content: View>: NSViewController, N
     public func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
             switch identifier {
             case NSTouchBarItem.Identifier("HelloWorld"):
-                let customViewItem = NSCustomTouchBarItem(identifier: identifier)
-                customViewItem.view = NSTextField(labelWithString: "Hello World!")
-                return customViewItem
+                let item = NSCustomTouchBarItem(identifier: identifier)
+                item.view = NSButton(title: "Test button", target: nil, action: nil)
+                return item
             default:
                 return nil
             }
